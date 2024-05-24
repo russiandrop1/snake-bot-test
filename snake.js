@@ -9,6 +9,11 @@ let foodX;
 let foodY;
 
 document.addEventListener("keydown", changeDirection);
+document.getElementById("left").addEventListener("click", () => changeDirection({ keyCode: 37 }));
+document.getElementById("up").addEventListener("click", () => changeDirection({ keyCode: 38 }));
+document.getElementById("down").addEventListener("click", () => changeDirection({ keyCode: 40 }));
+document.getElementById("right").addEventListener("click", () => changeDirection({ keyCode: 39 }));
+
 generateFood();
 
 function gameLoop() {
