@@ -1,18 +1,59 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
-const snake = [{ x: 200, y: 200 }];
+const snake = [{ x: 150, y: 150 }];
 const snakeSize = 10;
 let dx = snakeSize;
 let dy = 0;
 let foodX;
 let foodY;
+let gameSpeed = 200;
 
 document.addEventListener("keydown", changeDirection);
-document.getElementById("left").addEventListener("click", () => changeDirection({ keyCode: 37 }));
-document.getElementById("up").addEventListener("click", () => changeDirection({ keyCode: 38 }));
-document.getElementById("down").addEventListener("click", () => changeDirection({ keyCode: 40 }));
-document.getElementById("right").addEventListener("click", () => changeDirection({ keyCode: 39 }));
+canvas.addEventListener("touchstart", handleTouchStart, false);
+canvas.addEventListener("touchmove", handleTouchMove, false);
+
+let xDown = null;
+let yDown = null;
+
+function handleTouchStart(evt) {
+    const firstTouch = evt.touches[0];
+    xDown = firstTouch.clientX;
+    yDown = firstTouch.clientY;
+}
+
+function handleTouchMove(evt) {
+    if (!xDown || !yDown) {
+        return;
+    }
+
+    const xUp = evt.touches[0].clientX;
+    const yUp = evt.touches[0].clientY;
+
+    const xDiff = xDown - xUp;
+    const yDiff = yDown - yUp;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        if (xDiff > 0 && dx === 0) {
+            dx = -snakeSize;
+            dy = 0;
+        } else if (xDiff < 0 && dx === 0) {
+            dx = snakeSize;
+            dy = 0;
+        }
+    } else {
+        if (yDiff > 0 && dy === 0) {
+            dx = 0;
+            dy = -snakeSize;
+        } else if (yDiff < 0 && dy === 0) {
+            dx = 0;
+            dy = snakeSize;
+        }
+    }
+
+    xDown = null;
+    yDown = null;
+}
 
 generateFood();
 
@@ -25,7 +66,7 @@ function gameLoop() {
         moveSnake();
         drawSnake();
         gameLoop();
-    }, 100);
+    }, gameSpeed);
 }
 
 function clearCanvas() {
@@ -92,10 +133,10 @@ function hasGameEnded() {
 
     const hitLeftWall = snake[0].x < 0;
     const hitRightWall = snake[0].x >= canvas.width;
-    const hitToptWall = snake[0].y < 0;
+    const hitTopWall = snake[0].y < 0;
     const hitBottomWall = snake[0].y >= canvas.height;
 
-    return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall;
+    return hitLeftWall || hitRightWall || hitTopWall || hitBottomWall;
 }
 
 gameLoop();
