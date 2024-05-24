@@ -1,15 +1,15 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import Application, CommandHandler, CallbackContext
 
-def start(update: Update, context: CallbackContext) -> None:
+async def start(update: Update, context: CallbackContext) -> None:
     keyboard = [
-        [InlineKeyboardButton("Play Snake Game", web_app=WebAppInfo(url="https://github.com/russiandrop1/snake-bot-test.git"))]
+        [InlineKeyboardButton("Play Snake Game", web_app=WebAppInfo(url="YOUR_GITHUB_PAGES_URL"))]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text('Press the button to play the game!', reply_markup=reply_markup)
+    await update.message.reply_text('Press the button to play the game!', reply_markup=reply_markup)
 
 def main():
-    application = Application.builder().token("6305004926:AAHSGnXyHsPO-ltLN0ZTdkeG9RwFYKR_fus").build()
+    application = Application.builder().token("YOUR_TELEGRAM_BOT_TOKEN").build()
     application.add_handler(CommandHandler("start", start))
     application.run_polling()
 
