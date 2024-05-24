@@ -15,7 +15,9 @@ canvas.addEventListener("touchmove", handleTouchMove, false);
 
 // Prevent default scrolling behavior
 document.body.addEventListener('touchmove', function(event) {
-  event.preventDefault();
+  if (event.target === canvas) {
+    event.preventDefault();
+  }
 }, { passive: false });
 
 let xDown = null;
