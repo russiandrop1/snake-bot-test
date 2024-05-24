@@ -3,7 +3,7 @@ from telegram.ext import Application, CommandHandler, CallbackContext
 
 async def start(update: Update, context: CallbackContext) -> None:
     keyboard = [
-        [InlineKeyboardButton("Play Snake Game", web_app=WebAppInfo(url="https://github.com/russiandrop1/snake-bot-test.git"))]
+        [InlineKeyboardButton("Play Snake Game", web_app=WebAppInfo(url="https://russiandrop1.github.io/snake-bot-test/"))]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text('Press the button to play the game!', reply_markup=reply_markup)
