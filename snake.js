@@ -9,11 +9,10 @@ let foodX;
 let foodY;
 let gameSpeed = 200;
 
-document.addEventListener("keydown", changeDirection);
-document.getElementById("up").addEventListener("click", () => changeDirection({ keyCode: 38 }));
-document.getElementById("down").addEventListener("click", () => changeDirection({ keyCode: 40 }));
-document.getElementById("left").addEventListener("click", () => changeDirection({ keyCode: 37 }));
-document.getElementById("right").addEventListener("click", () => changeDirection({ keyCode: 39 }));
+document.getElementById("up").addEventListener("click", () => changeDirection(38));
+document.getElementById("down").addEventListener("click", () => changeDirection(40));
+document.getElementById("left").addEventListener("click", () => changeDirection(37));
+document.getElementById("right").addEventListener("click", () => changeDirection(39));
 
 generateFood();
 
@@ -50,8 +49,7 @@ function moveSnake() {
     }
 }
 
-function changeDirection(event) {
-    const key = event.keyCode;
+function changeDirection(key) {
     const goingUp = dy === -snakeSize;
     const goingDown = dy === snakeSize;
     const goingRight = dx === snakeSize;
