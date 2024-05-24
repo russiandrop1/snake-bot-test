@@ -10,57 +10,10 @@ let foodY;
 let gameSpeed = 200;
 
 document.addEventListener("keydown", changeDirection);
-canvas.addEventListener("touchstart", handleTouchStart, false);
-canvas.addEventListener("touchmove", handleTouchMove, false);
-
-// Prevent default scrolling behavior
-document.body.addEventListener('touchmove', function(event) {
-  if (event.target === canvas) {
-    event.preventDefault();
-  }
-}, { passive: false });
-
-let xDown = null;
-let yDown = null;
-
-function handleTouchStart(evt) {
-    const firstTouch = evt.touches[0];
-    xDown = firstTouch.clientX;
-    yDown = firstTouch.clientY;
-}
-
-function handleTouchMove(evt) {
-    if (!xDown || !yDown) {
-        return;
-    }
-
-    const xUp = evt.touches[0].clientX;
-    const yUp = evt.touches[0].clientY;
-
-    const xDiff = xDown - xUp;
-    const yDiff = yDown - yUp;
-
-    if (Math.abs(xDiff) > Math.abs(yDiff)) {
-        if (xDiff > 0 && dx === 0) {
-            dx = -snakeSize;
-            dy = 0;
-        } else if (xDiff < 0 && dx === 0) {
-            dx = snakeSize;
-            dy = 0;
-        }
-    } else {
-        if (yDiff > 0 && dy === 0) {
-            dx = 0;
-            dy = -snakeSize;
-        } else if (yDiff < 0 && dy === 0) {
-            dx = 0;
-            dy = snakeSize;
-        }
-    }
-
-    xDown = null;
-    yDown = null;
-}
+document.getElementById("up").addEventListener("click", () => changeDirection({ keyCode: 38 }));
+document.getElementById("down").addEventListener("click", () => changeDirection({ keyCode: 40 }));
+document.getElementById("left").addEventListener("click", () => changeDirection({ keyCode: 37 }));
+document.getElementById("right").addEventListener("click", () => changeDirection({ keyCode: 39 }));
 
 generateFood();
 
