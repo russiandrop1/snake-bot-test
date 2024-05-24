@@ -9,10 +9,10 @@ let foodX;
 let foodY;
 let gameSpeed = 200;
 
-document.getElementById("up").addEventListener("click", () => changeDirection(38));
-document.getElementById("down").addEventListener("click", () => changeDirection(40));
-document.getElementById("left").addEventListener("click", () => changeDirection(37));
-document.getElementById("right").addEventListener("click", () => changeDirection(39));
+document.getElementById("up").addEventListener("touchstart", () => changeDirection(38));
+document.getElementById("down").addEventListener("touchstart", () => changeDirection(40));
+document.getElementById("left").addEventListener("touchstart", () => changeDirection(37));
+document.getElementById("right").addEventListener("touchstart", () => changeDirection(39));
 
 generateFood();
 
