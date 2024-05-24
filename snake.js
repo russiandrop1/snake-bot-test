@@ -13,6 +13,11 @@ document.addEventListener("keydown", changeDirection);
 canvas.addEventListener("touchstart", handleTouchStart, false);
 canvas.addEventListener("touchmove", handleTouchMove, false);
 
+// Prevent default scrolling behavior
+document.body.addEventListener('touchmove', function(event) {
+  event.preventDefault();
+}, { passive: false });
+
 let xDown = null;
 let yDown = null;
 
